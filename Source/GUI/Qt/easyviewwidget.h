@@ -9,6 +9,7 @@
 
 #include <QWidget>
 #include "Common/Core.h"
+#include <QComboBox>
 #include <QGroupBox>
 #include <QDebug>
 
@@ -26,6 +27,7 @@ private:
     size_t Boxes_Count_Get(size_t StreamKind);
     QString Title_Get(stream_t StreamKind);
     QVector<QWidget *> Boxes;
+    QComboBox* fileChoice;
     Core* C;
     int FilePos;
 
