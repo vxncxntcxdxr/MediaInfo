@@ -26,6 +26,19 @@ EasyViewWidget::EasyViewWidget(Core* C, QWidget *parent) : QWidget(parent)
     FilePos=0;
     C->Menu_View_Easy();
 
+    fileChoice = new QComboBox(this);
+    fileChoice->setMinimumContentsLength(1);
+
+#if defined(_WIN32) && defined(WINAPI_FAMILY) && (WINAPI_FAMILY==WINAPI_FAMILY_APP) // Workaround render bug
+    QString style = "QComboBox QAbstractItemView { border: 1px solid gray }";
+    fileChoice->setStyleSheet(style);
+#endif
+
+    for (size_t Pos=0; Pos<C->Count_Get(); Pos++)
+        fileChoice->addItem(wstring2QString(C->Get(Pos, Stream_General, 0, __T("CompleteName"))));
+
+    connect(fileChoice,SIGNAL(currentIndexChanged(int)),SLOT(changeFilePos(int)));
+
     refreshDisplay();
 }
 
@@ -39,21 +52,8 @@ void EasyViewWidget::refreshDisplay() {
     QVBoxLayout *layout = new QVBoxLayout();
     setLayout(layout);
 
-    QComboBox* fileChoice = new QComboBox();
-    fileChoice->setMinimumContentsLength(1);
-
-#if defined(_WIN32) && defined(WINAPI_FAMILY) && (WINAPI_FAMILY==WINAPI_FAMILY_APP) // Workaround render bug
-    QString style = "QComboBox QAbstractItemView { border: 1px solid gray }";
-    fileChoice->setStyleSheet(style);
-#endif
-
     layout->addWidget(fileChoice);
-    for (size_t Pos=0; Pos<C->Count_Get(); Pos++)
-        fileChoice->addItem(wstring2QString(C->Get(Pos, Stream_General, 0, __T("CompleteName"))));
-
     fileChoice->setCurrentIndex(FilePos);
-
-    connect(fileChoice,SIGNAL(currentIndexChanged(int)),SLOT(changeFilePos(int)));
 
     for (size_t StreamPos=0; StreamPos<Stream_Max; StreamPos++) {
         bool addBox = false;
