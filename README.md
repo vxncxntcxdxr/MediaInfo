@@ -102,19 +102,18 @@ There are multiple GUIs utilizing different GUI frameworks on Windows. Each of t
 
 ##### Qt GUI
 
-Install Qt for open source use (<https://www.qt.io/download-qt-installer-oss>) if you do not have Qt installed yet. It is recommended to use the latest version or at least 6.8.0 for Windows 11. Python is required to update the translation files. It may be installed from the Microsoft Store.
+Install Qt for open source use (<https://www.qt.io/download-qt-installer-oss>) if you do not have Qt installed yet. It is recommended to use the latest version or at least 6.11.0 for Windows 11. Python is required to update the translation files. It may be installed from the Microsoft Store.
 
 Prepare the prerequisites by running the following commands:
 
 ```cmd
 MSBuild -t:MediaInfoDLL -p:Configuration=Release;Platform=x64 MediaInfoLib\Project\MSVC2022\MediaInfoLib.sln
-call MediaInfo\Source\GUI\Qt\Qt_Translations_Updater\update_Qt_translations.cmd
 ```
 
 The Qt GUI can be built by opening `MediaInfo\Project\QMake\GUI\MediaInfoQt.pro` in Qt Creator or by using the command line:
 
 ```cmd
-qmake.exe MediaInfo\Project\QMake\GUI\MediaInfoQt.pro -spec win32-msvc "CONFIG+=qtquickcompiler" && jom.exe qmake_all
+qmake.exe MediaInfo\Project\QMake\GUI\MediaInfoQt.pro -spec win32-msvc "CONFIG+=qtquickcompiler"
 jom.exe
 ```
 

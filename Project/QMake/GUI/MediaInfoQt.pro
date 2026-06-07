@@ -30,6 +30,9 @@ win32 {
     contains(QT_ARCH, x86_64) {
         DESTDIR = x64
     }
+    contains(QT_ARCH, arm64) {
+        DESTDIR = ARM64
+    }
 }
 
 !defined(packagesExist, test) {
