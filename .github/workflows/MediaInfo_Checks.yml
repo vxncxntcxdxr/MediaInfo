@@ -86,12 +86,15 @@ jobs:
         include:
           - architecture: Win32
             runner: windows-latest
+            msvc: MSVC2026
             Format_Profile: Executable / Intel i386
           - architecture: x64
             runner: windows-latest
+            msvc: MSVC2026
             Format_Profile: Executable / AMD x86-64
           - architecture: ARM64
             runner: windows-11-arm
+            msvc: MSVC2022
             Format_Profile: Executable / ARM64
       fail-fast: false
     name: Windows (${{ matrix.architecture }})
@@ -121,10 +124,10 @@ jobs:
         with:
           msbuild-architecture: ${{ runner.arch == 'ARM64' && 'arm64' || 'x64' }}
       - name: Build
-        run: msbuild -restore -p:RestorePackagesConfig=true -p:Configuration=Release -p:Platform=${{ matrix.architecture }} ${{ github.workspace }}\MediaInfo\Project\MSVC2022\MediaInfo-NoGUI.slnf -verbosity:quiet -warnaserror
+        run: msbuild -restore -p:RestorePackagesConfig=true -p:Configuration=Release -p:Platform=${{ matrix.architecture }} ${{ github.workspace }}\MediaInfo\Project\${{ matrix.msvc }}\MediaInfo-NoGUI.slnf -verbosity:quiet -warnaserror
       - name: Test CLI
         run : |
-          cd ${{ github.workspace }}\MediaInfo\Project\MSVC2022\${{ matrix.architecture }}\Release
+          cd ${{ github.workspace }}\MediaInfo\Project\${{ matrix.msvc }}\${{ matrix.architecture }}\Release
           $expected_output = "${{ matrix.Format_Profile }}"
           $actual_output = & ".\MediaInfo.exe" "--Output=General;%Format_Profile%" "MediaInfo.exe"
           Write-Host "Expected: '$expected_output'"

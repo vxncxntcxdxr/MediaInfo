@@ -27,9 +27,11 @@ jobs:
         include:
           - architecture: x64
             qt_arch: win64_msvc2022_64
+            msvc: MSVC2026
             runner: windows-latest
           - architecture: ARM64
             qt_arch: win64_msvc2022_arm64
+            msvc: MSVC2022
             runner: windows-11-arm
       fail-fast: false
     name: Windows (${{ matrix.architecture }})
@@ -66,12 +68,13 @@ jobs:
           msbuild-architecture: ${{ runner.arch == 'ARM64' && 'arm64' || 'x64' }}
       - name: Build dependencies
         run: |
-          msbuild -t:MediaInfoLib -p:Configuration=Release -p:Platform=${{ matrix.architecture }} -clp:ForceConsoleColor ${{ github.workspace }}\MediaInfoLib\Project\MSVC2022\MediaInfoLib.sln
+          msbuild -t:MediaInfoLib -p:Configuration=Release -p:Platform=${{ matrix.architecture }} -clp:ForceConsoleColor ${{ github.workspace }}\MediaInfoLib\Project\${{ matrix.msvc }}\MediaInfoLib.${{ matrix.msvc == 'MSVC2026' && 'slnx' || 'sln' }}
+      - name: Setup MSVC Environment
+        uses: ./MediaInfo/.github/actions/setup-msvc
       - name: Build
         shell: cmd
         run: |
-          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{ runner.arch == 'ARM64' && 'arm64' || 'x64' }}
-          qmake.exe ${{ github.workspace }}\MediaInfo\Project\QMake\GUI\MediaInfoQt.pro -spec ${{ runner.arch == 'ARM64' && 'win32-arm64-msvc' || 'win32-msvc' }} "CONFIG+=qtquickcompiler" && nmake.exe qmake_all
+          qmake.exe ${{ github.workspace }}\MediaInfo\Project\QMake\GUI\MediaInfoQt.pro -spec ${{ runner.arch == 'ARM64' && 'win32-arm64-msvc' || 'win32-msvc' }} "CONFIG+=qtquickcompiler"
           nmake.exe
 
   Ubuntu:
