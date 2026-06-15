@@ -747,7 +747,7 @@ void __fastcall TPreferencesF::GUI_Configure()
     Tree->Items->Item[3]->Text=Prefs->Translate(__T("Sheet")).c_str();
     Tree->Items->Item[4]->Text=Prefs->Translate(__T("Tree & Text")).c_str();
     Tree->Items->Item[5]->Text=Prefs->Translate(__T("Custom")).c_str();
-    Tree->Items->Item[7]->Text=Prefs->Translate(__T("Graph")).c_str();
+    Tree->Items->Item[6]->Text=Prefs->Translate(__T("Graph")).c_str();
     Tree->Items->Item[7]->Text=Prefs->Translate(__T("Language")).c_str();
     //-General
     General_Language_More->Caption=(Prefs->Translate(__T("More"))+__T("...")).c_str();
@@ -764,7 +764,7 @@ void __fastcall TPreferencesF::GUI_Configure()
     General_Output_Sel->Items->Add(Prefs->Translate(__T("HTML")).c_str());
     General_Output_Sel->Items->Add("XML");
     General_Output_Sel->Items->Add("JSON");
-    General_Output_Sel->Items->Add("Graph");
+    General_Output_Sel->Items->Add(Prefs->Translate(__T("Graph")).c_str());
     General_Output_Sel->Items->Add("MPEG-7 (strict)");
     General_Output_Sel->Items->Add("MPEG-7 (relaxed)");
     General_Output_Sel->Items->Add("MPEG-7 (extended)");

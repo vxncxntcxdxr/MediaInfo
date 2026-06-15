@@ -1414,6 +1414,10 @@ TopFrontToSide;
 Total;Toplam
 TotalNumberOfParts;Parçaların Toplam Sayısı
 TotalProgrammeDuration;Toplam Program Süresi
+TraceLevel0;
+TraceLevel5;
+TraceLevel9;
+TraceLevel10;
 Track;Parça adı
 Track_Count;Parça sayısı
 TrackFormat;

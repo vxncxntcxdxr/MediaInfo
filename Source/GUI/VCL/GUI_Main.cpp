@@ -718,6 +718,7 @@ void __fastcall TMainF::Translate()
     M_View_Tree->Caption=Prefs->Translate(__T("Tree")).c_str();
     M_View_Text->Caption=Prefs->Translate(__T("Text")).c_str();
     M_View_HTML->Caption=Prefs->Translate(__T("HTML")).c_str();
+    M_View_Graph_Svg->Caption=Prefs->Translate(__T("Graph")).c_str();
     M_View_Custom->Caption=Prefs->Translate(__T("Custom")).c_str();
     M_View_System->Caption=Prefs->Translate(__T("Your system")).c_str();
     M_Options->Caption=Prefs->Translate(__T("Options")).c_str();
@@ -732,6 +733,11 @@ void __fastcall TMainF::Translate()
     M_Debug->Caption=Prefs->Translate(__T("Debug")).c_str();
     M_Debug_Header->Caption=Prefs->Translate(__T("Header file")).c_str();
     M_Debug_Advanced->Caption=Prefs->Translate(__T("Advanced mode")).c_str();
+    M_Debug_TraceLevel0->Caption=Prefs->Translate(__T("TraceLevel0")).c_str();
+    M_Debug_TraceLevel50->Caption=Prefs->Translate(__T("TraceLevel5")).c_str();
+    M_Debug_TraceLevel90->Caption=Prefs->Translate(__T("TraceLevel9")).c_str();
+    M_Debug_TraceLevel100->Caption=Prefs->Translate(__T("TraceLevel10")).c_str();
+    M_Options_FullParsing->Caption=Prefs->Translate(__T("FullParsing")).c_str();
     M_Help->Caption=Prefs->Translate(__T("Help")).c_str();
     M_Help_About->Caption=Prefs->Translate(__T("About")).c_str();
     M_Help_SupportedFormats->Caption=Prefs->Translate(__T("Known formats")).c_str();
